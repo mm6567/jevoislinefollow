@@ -1,0 +1,84 @@
+cd ~/Documents/jevois/
+git clone https://github.com/mm6567/jevoislinefollow.git
+cd jevoislinefollow/
+jevois-create-module mm6567 LineFollow
+# edit ~/Documents/jevois/jevoislinefollow/linefollow/src/Modules/LineFollow/LineFollow.C
+# edit postinstall.sh
+cd ~/Documents/jevois/jevoislinefollow/linefollow
+./rebuild-host.sh 
+sudo jevois-add-videomapping YUYV 640 480 28.7 YUYV 640 480 28.7 mm6567 LineFollow
+# or sudo ./postinstall
+# above args are from @videomapping line in LineFollow.C
+jevois-daemon --loglevel=error
+streamoff
+listmappings
+# look for mm6567:LineFollow
+# seems to like to put them in at 21
+setmapping 21
+streamon
+quit
+###
+##
+# tried to use ./rebuild-platform.sh but errors
+#
+# CMake Error at CMakeLists.txt:34 (project):
+  The CMAKE_C_COMPILER:
+
+    /home/matt/jevois-sdk/out/sun8iw5p1/linux/common/buildroot/host/usr/bin/arm-buildroot-linux-gnueabihf-gcc
+
+  is not a full path to an existing compiler tool.
+
+  Tell CMake where to find the compiler by setting either the environment
+  variable "CC" or the CMake cache entry CMAKE_C_COMPILER to the full path to
+  the compiler, or to the compiler name if it is in the PATH.
+
+
+CMake Error at CMakeLists.txt:34 (project):
+  The CMAKE_CXX_COMPILER:
+
+    /home/matt/jevois-sdk/out/sun8iw5p1/linux/common/buildroot/host/usr/bin/arm-buildroot-linux-gnueabihf-g++
+
+  is not a full path to an existing compiler tool.
+
+  Tell CMake where to find the compiler by setting either the environment
+  variable "CXX" or the CMake cache entry CMAKE_CXX_COMPILER to the full path
+  to the compiler, or to the compiler name if it is in the PATH.
+#
+#
+# docs say that jevois-sdk-dev should have gotten the cross compiler
+#
+# tried something that looks like cross-compiler by itself:
+sudo apt install gcc-4.7-arm-linux-gnueabi gcc-6-arm-linux-gnueabihf g++-6-arm-linux-gnueabihf gawk u-boot-tools
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package gcc-6-arm-linux-gnueabihf is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+W: Duplicate sources.list entry https://dl.google.com/linux/chrome/deb stable Release
+E: Package 'gcc-6-arm-linux-gnueabihf' has no installation candidate
+E: Unable to locate package g++-6-arm-linux-gnueabihf
+E: Couldn't find any package by regex 'g++-6-arm-linux-gnueabihf'
+#
+#
+#
+and then found:
+For some Ubuntu 16.04LTS (Xenial) based distros such as Mint18, you need to add:
+
+deb http://cz.archive.ubuntu.com/ubuntu yakkety main universe
+deb http://ppa.launchpad.net/ubuntu-toolchain-r/test
+
+to /etc/apt/sources.list to get the necessary packages (including g++-6). You can remove them when done.
+#
+#
+#
+matt@T5500:~$ sudo add-apt-repository "deb http://cz.archive.ubuntu.com/ubuntu yakkety main universe"
+[sudo] password for matt: 
+matt@T5500:~$ sudo add-apt-repository "deb http://ppa.launchpad.net/ubuntu-toolchain-r/test"
+Error: 'deb http://ppa.launchpad.net/ubuntu-toolchain-r/test' invalid
+matt@T5500:~$ 
+# and compiler install still failed
+# giving up on C++ for now and going back to Python
+
+
