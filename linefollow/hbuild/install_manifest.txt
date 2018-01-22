@@ -1,0 +1,5 @@
+/jevois/modules/mm6567/LineFollow/postinstall
+/jevois/modules/mm6567/LineFollow/screenshot1.png
+/jevois/modules/mm6567/LineFollow/icon.png
+/jevois/modules/mm6567/LineFollow/LineFollow.so
+/jevois/share/README.txt

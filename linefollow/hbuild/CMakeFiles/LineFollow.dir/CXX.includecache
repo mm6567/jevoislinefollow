@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/matt/Documents/jevois/jevoislinefollow/linefollow/src/Modules/LineFollow/LineFollow.C
+jevois/Core/Module.H
+-
+jevois/Image/RawImageOps.H
+-
+
