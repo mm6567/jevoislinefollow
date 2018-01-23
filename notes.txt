@@ -1,3 +1,4 @@
+# ## 2018-01-21
 cd ~/Documents/jevois/
 git clone https://github.com/mm6567/jevoislinefollow.git
 cd jevoislinefollow/
@@ -81,4 +82,8 @@ matt@T5500:~$
 # and compiler install still failed
 # giving up on C++ for now and going back to Python
 
+# ## 2018-01-22
+# Python attempt
+cd ~/Documents/jevois/jevoislinefollow
+jevois-create-python-module mm6567 LineFollowPy
 
