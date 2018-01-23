@@ -1,0 +1,3 @@
+/jevois/modules/mm6567/LineFollowPy/postinstall
+/jevois/modules/mm6567/LineFollowPy/LineFollowPy.py
+/jevois/share/README.txt

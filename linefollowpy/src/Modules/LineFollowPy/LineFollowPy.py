@@ -8,9 +8,9 @@ import numpy as np
 #
 # Feel free to edit it and try something else.
 #
-# @author Laurent Itti
+# @author mm6567
 # 
-# @videomapping YUYV 640 480 15.0 YUYV 640 480 15.0 JeVois LineFollowPy
+# @videomapping YUYV 640 480 15.1 YUYV 640 480 15.1 mm6567 LineFollowPy
 # @email itti\@usc.edu
 # @address University of Southern California, HNB-07A, 3641 Watt Way, Los Angeles, CA 90089-2520, USA
 # @copyright Copyright (C) 2017 by Laurent Itti, iLab and the University of Southern California
@@ -56,7 +56,7 @@ class LineFollowPy:
         #     http://docs.opencv.org/3.2.0/d6/d6e/group__imgproc__draw.html for reference manual.
         cv2.circle(img, (int(width/2), int(height/2)), 100, (255,0,0), 3) 
 
-        cv2.putText(img, "Hello JeVois - frame {}".format(self.frame), (10, 30), cv2.FONT_HERSHEY_SIMPLEX,
+        cv2.putText(img, "mm6567 - frame {}".format(self.frame), (10, 30), cv2.FONT_HERSHEY_SIMPLEX,
                     0.5, (0,0,255), 1, cv2.LINE_AA)
 
         # Write frames/s info from our timer (NOTE: does not account for output conversion time):

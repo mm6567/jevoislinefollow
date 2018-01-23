@@ -86,4 +86,26 @@ matt@T5500:~$
 # Python attempt
 cd ~/Documents/jevois/jevoislinefollow
 jevois-create-python-module mm6567 LineFollowPy
+git add *
+git commit --message "moving to Python"
+git push
+# edited LineFollowPy.py and postinstall
+cd linefollowpy
+./rebuild-host.sh
+jevois-daemon --loglevel=error
+streamoff
+listmappings
+# but no LineFollowPy showing up in list
+# forgot to do the add mapping step (basically have to run the postinstall script manually)
+sudo ./src/Modules/LineFollowPy/postinstall
+# and then re-run jevois-daemon and it is in the list
+jevois-daemon --loglevel=error
+streamoff
+listmappings
+setmapping 23
+streamon
+# and output looks right
+
+
+
 
