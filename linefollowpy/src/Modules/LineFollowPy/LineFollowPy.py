@@ -56,7 +56,12 @@ class LineFollowPy:
         self.timer.start()
 
         imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) #Convert to Gray Scale
-        ret, thresh = cv2.threshold(imgray,100,255,cv2.THRESH_BINARY_INV) #Get Threshold
+        #ret, thresh = cv2.threshold(imgray,100,255,cv2.THRESH_BINARY_INV) #Get Threshold
+        #ret, thresh = cv2.threshold(imgray,100,255,cv2.THRESH_BINARY) #Get Threshold
+        #thresh = cv2.adaptiveThreshold(imgray,255,cv2.ADAPTIVE_THRESH_MEAN_C,\
+        #    cv2.THRESH_BINARY_INV,11,2)
+        # threshold function description: https://docs.opencv.org/3.3.1/d7/d4d/tutorial_py_thresholding.html
+         
         _, self.contours, _ = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) #Get contour
                 
         self.prev_MC = self.MainContour
@@ -78,6 +83,9 @@ class LineFollowPy:
             
             self.dir =  int((self.middleX-self.contourCenterX) * self.getContourExtent(self.MainContour))
             
+            # convert the gray back to rbg format so can view what is going on with thresholding
+            img = cv2.cvtColor(thresh,cv2.COLOR_GRAY2RGB)
+
             cv2.drawContours(img,self.MainContour,-1,(0,255,0),3) #Draw Contour GREEN
             cv2.circle(img, (self.contourCenterX, self.middleY), 7, (255,255,255), -1) #Draw dX circle WHITE
             cv2.circle(img, (self.middleX, self.middleY), 3, (0,0,255), -1) #Draw middle circle RED
