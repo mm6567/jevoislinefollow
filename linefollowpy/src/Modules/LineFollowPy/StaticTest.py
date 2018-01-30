@@ -38,6 +38,13 @@ cv2.drawContours(img,conts,-1,(255,0,0),3)
 
 cv2.imshow('img with conts',img)
 
+for i in range(len(conts)):
+    x,y,w,h=cv2.boundingRect(conts[i])
+    cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255), 2)
+    # cv2.cv.PutText(cv2.cv.fromarray(img), str(i+1),(x,y+h),font,(0,255,255))
+
+cv2.imshow('img with bounded conts',img)
+
 # contours = cv2.findContours(imthresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) #Get contour
 # if contours:
     # print(contours)
