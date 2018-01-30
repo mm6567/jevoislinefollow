@@ -20,8 +20,8 @@ class Image:
         
             self.height, self.width  = self.image.shape[:2]
 
-            self.middleX = int(self.width/2) #Get X coordenate of the middle point
-            self.middleY = int(self.height/2) #Get Y coordenate of the middle point
+            self.middleX = int(self.width/2) #Get X coordinate of the middle point
+            self.middleY = int(self.height/2) #Get Y coordinate of the middle point
             
             self.prev_cX = self.contourCenterX
             if self.getContourCenter(self.MainContour) != 0:

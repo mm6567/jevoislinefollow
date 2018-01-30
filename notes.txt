@@ -106,6 +106,43 @@ setmapping 23
 streamon
 # and output looks right
 
+# ## 2018-01-28
+# tedious to build and run jevois-daemon over and over, so decided to take a jpg of line to LineFollow
+# and then just some straight python in StaticTest.py to try out algorithms and settings
+# 
+matt@T5500:~$ pip3 install opencv-python
+Collecting opencv-python
+  Downloading opencv_python-3.4.0.12-cp35-cp35m-manylinux1_x86_64.whl (24.9MB)
+    100% |████████████████████████████████| 24.9MB 59kB/s 
+Collecting numpy>=1.11.1 (from opencv-python)
+  Downloading numpy-1.14.0-cp35-cp35m-manylinux1_x86_64.whl (17.1MB)
+    100% |████████████████████████████████| 17.1MB 87kB/s 
+Installing collected packages: numpy, opencv-python
+Successfully installed numpy-1.11.0 opencv-python
+You are using pip version 8.1.1, however version 9.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+matt@T5500:~$ 
+#
+#
+matt@T5500:~/Documents/jevois/jevoislinefollow/linefollowpy/src/Modules/LineFollowPy$ python3.5 StaticTest.py
+https://www.rapidtables.com/convert/color/rgb-to-hsv.html has a nice RGB to HSV converter if want to do color detection
+
+# ## 2018-01-29
+# going to try simple color finding instead of contours
+# http://www.davidhampgonsalves.com/opencv/python-color-tracking/
+# https://thecodacus.com/opencv-object-tracking-colour-detection-python/#.Wm_PaeZG3CI
+# https://www.pyimagesearch.com/2015/09/14/ball-tracking-with-opencv/
+#
+# hsv range for black wasn't what I got by using calculator above
+# https://stackoverflow.com/questions/25398188/black-color-object-detection-hsv-range-in-opencv
+#
+# good description of cv2.findContours : https://www.pyimagesearch.com/2014/04/21/building-pokedex-python-finding-game-boy-screen-step-4-6/
+#
+# but samples written for slightly older version of opencv
+# https://stackoverflow.com/questions/25504964/opencv-python-valueerror-too-many-values-to-unpack
+
+
+
 
 
 
