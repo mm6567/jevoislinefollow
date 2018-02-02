@@ -1,4 +1,4 @@
-#!python3.5
+#!/usr/bin/python3.5
 # static testing for line following
 import numpy as np
 import cv2
@@ -34,14 +34,31 @@ cv2.imshow('after morphs', immaskClose)
 
 #maskFinal=maskClose
 _, conts, _ = cv2.findContours(immaskClose.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+# below the -1 means draw all contours
 cv2.drawContours(img,conts,-1,(255,0,0),3)
 
 cv2.imshow('img with conts',img)
 
+ymax = 0
+xmax = 0
+hmax = 0
+wmax = 0
+
 for i in range(len(conts)):
     x,y,w,h=cv2.boundingRect(conts[i])
+    if y >= ymax:
+      ymax = y
+      print(y)
+      xmax = x
+      print(x)
+      hmax = h
+      print(h)
+      wmax = w
+      print(w)
     cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255), 2)
     # cv2.cv.PutText(cv2.cv.fromarray(img), str(i+1),(x,y+h),font,(0,255,255))
+
+cv2.circle(img, (xmax, ymax), 10, (0,255,255), -1) 
 
 cv2.imshow('img with bounded conts',img)
 
