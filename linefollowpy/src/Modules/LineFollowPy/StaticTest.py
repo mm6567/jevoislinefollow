@@ -30,14 +30,14 @@ kernelClose=np.ones((20,20))
 
 immaskOpen=cv2.morphologyEx(immask,cv2.MORPH_OPEN,kernelOpen)
 immaskClose=cv2.morphologyEx(immaskOpen,cv2.MORPH_CLOSE,kernelClose)
-cv2.imshow('after morphs', immaskClose)
+#cv2.imshow('after morphs', immaskClose)
 
 #maskFinal=maskClose
 _, conts, _ = cv2.findContours(immaskClose.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
 # below the -1 means draw all contours
-cv2.drawContours(img,conts,-1,(255,0,0),3)
+#cv2.drawContours(img,conts,-1,(255,0,0),3)
 
-cv2.imshow('img with conts',img)
+#cv2.imshow('img with conts',img)
 
 ymax = 0
 xmax = 0
@@ -55,12 +55,14 @@ for i in range(len(conts)):
       print(h)
       wmax = w
       print(w)
-    cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255), 2)
+    # cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255), 2)
     # cv2.cv.PutText(cv2.cv.fromarray(img), str(i+1),(x,y+h),font,(0,255,255))
+targetx = xmax + int(wmax/2)
+targety = ymax + int(hmax/2)
+cv2.circle(img, (targetx, targety), 10, (0,255,255), -1) 
 
-cv2.circle(img, (xmax, ymax), 10, (0,255,255), -1) 
-
-cv2.imshow('img with bounded conts',img)
+# cv2.imshow('img with bounded conts',img)
+cv2.imshow('img with target',img)
 
 # contours = cv2.findContours(imthresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) #Get contour
 # if contours:

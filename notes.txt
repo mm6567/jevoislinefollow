@@ -152,7 +152,8 @@ https://www.rapidtables.com/convert/color/rgb-to-hsv.html has a nice RGB to HSV 
  1134  head StaticTest.py 
  1135  chmod u+x StaticTest.py 
  1136  ls
- 1137  ./StaticTest.py 
+ 1137  ./StaticTest.py
+ ## 1138 through 1140 are done from ~/Documents/jevois/jevoislinefollow (I've been doing it from Visual Studio Code's built in Terminal) 
  1138  git add *
  1139  git commit --message "start finding contour closest to bottom"
  1140  git push

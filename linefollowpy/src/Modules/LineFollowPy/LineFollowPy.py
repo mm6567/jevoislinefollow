@@ -55,55 +55,43 @@ class LineFollowPy:
         # Start measuring image processing time (NOTE: does not account for input conversion time):
         self.timer.start()
 
-        imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) #Convert to Gray Scale
-        #ret, thresh = cv2.threshold(imgray,100,255,cv2.THRESH_BINARY_INV) #Get Threshold
-        #ret, thresh = cv2.threshold(imgray,100,255,cv2.THRESH_BINARY) #Get Threshold
-        #thresh = cv2.adaptiveThreshold(imgray,255,cv2.ADAPTIVE_THRESH_MEAN_C,\
-        #    cv2.THRESH_BINARY_INV,11,2)
-        # threshold function description: https://docs.opencv.org/3.3.1/d7/d4d/tutorial_py_thresholding.html
-         
-        _, self.contours, _ = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) #Get contour
-                
-        self.prev_MC = self.MainContour
-        if self.contours:
-            self.MainContour = max(self.contours, key=cv2.contourArea)
-        
-            self.height, self.width  = img.shape[:2]
+# ######## user code here
 
-            self.middleX = int(self.width/2) #Get X coordinate of the middle point
-            self.middleY = int(self.height/2) #Get Y coordinate of the middle point
-            
-            self.prev_cX = self.contourCenterX
-            if self.getContourCenter(self.MainContour) != 0:
-                self.contourCenterX = self.getContourCenter(self.MainContour)[0]
-                if abs(self.prev_cX-self.contourCenterX) > 5:
-                    self.correctMainContour(self.prev_cX)
-            else:
-                self.contourCenterX = 0
-            
-            self.dir =  int((self.middleX-self.contourCenterX) * self.getContourExtent(self.MainContour))
-            
-            # convert the gray back to rbg format so can view what is going on with thresholding
-            img = cv2.cvtColor(thresh,cv2.COLOR_GRAY2RGB)
+imhsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+lowerBound=np.array([0,0,0])
+# note that h and s aren't the 0,0 I though by using the online hsv calc
+upperBound=np.array([180,255,40])
+immask=cv2.inRange(imhsv,lowerBound,upperBound)
 
-            cv2.drawContours(img,self.MainContour,-1,(0,255,0),3) #Draw Contour GREEN
-            cv2.circle(img, (self.contourCenterX, self.middleY), 7, (255,255,255), -1) #Draw dX circle WHITE
-            cv2.circle(img, (self.middleX, self.middleY), 3, (0,0,255), -1) #Draw middle circle RED
-            
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(img,str(self.middleX-self.contourCenterX),(self.contourCenterX+20, self.middleY), font, 1,(200,0,200),2,cv2.LINE_AA)
-            cv2.putText(img,"Weight:%.3f"%self.getContourExtent(self.MainContour),(self.contourCenterX+20, self.middleY+35), font, 0.5,(200,0,200),1,cv2.LINE_AA)
-        
-#
-#        # Draw a couple of things into the image:
-#        # See http://docs.opencv.org/3.2.0/dc/da5/tutorial_py_drawing_functions.html for tutorial
-#        # See http://docs.opencv.org/3.0-beta/modules/imgproc/doc/drawing_functions.html and
-#        #     http://docs.opencv.org/3.2.0/d6/d6e/group__imgproc__draw.html for reference manual.
-#        cv2.circle(img, (int(width/2), int(height/2)), 100, (255,0,0), 3) 
-#
-#        cv2.putText(img, "mm6567 - frame {}".format(self.frame), (10, 30), cv2.FONT_HERSHEY_SIMPLEX,
-#                    0.5, (0,0,255), 1, cv2.LINE_AA)
-#
+kernelOpen=np.ones((5,5))
+kernelClose=np.ones((20,20))
+
+immaskOpen=cv2.morphologyEx(immask,cv2.MORPH_OPEN,kernelOpen)
+immaskClose=cv2.morphologyEx(immaskOpen,cv2.MORPH_CLOSE,kernelClose)
+_, conts, _ = cv2.findContours(immaskClose.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+
+ymax = 0
+xmax = 0
+hmax = 0
+wmax = 0
+
+for i in range(len(conts)):
+    x,y,w,h=cv2.boundingRect(conts[i])
+    if y >= ymax:
+      ymax = y
+      print(y)
+      xmax = x
+      print(x)
+      hmax = h
+      print(h)
+      wmax = w
+      print(w)
+targetx = xmax + int(wmax/2)
+targety = ymax + int(hmax/2)
+cv2.circle(img, (targetx, targety), 10, (0,255,255), -1) 
+
+
+# ######## end user code
 
         # Write frames/s info from our timer (NOTE: does not account for output conversion time):
         fps = self.timer.stop()
