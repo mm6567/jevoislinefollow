@@ -1,3 +1,4 @@
 /jevois/modules/mm6567/LineFollowPy/postinstall
 /jevois/modules/mm6567/LineFollowPy/LineFollowPy.py
+/jevois/modules/mm6567/LineFollowPy/StaticTest.py
 /jevois/share/README.txt
