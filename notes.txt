@@ -141,7 +141,35 @@ https://www.rapidtables.com/convert/color/rgb-to-hsv.html has a nice RGB to HSV 
 # but samples written for slightly older version of opencv
 # https://stackoverflow.com/questions/25504964/opencv-python-valueerror-too-many-values-to-unpack
 
+# ## 2018-02-27
+# it's been almost a month, so here's some stuff from shell history to help me remember:
 
+ 1129  cd Documents/jevois/jevoislinefollow/linefollowpy/
+ 1130  ls
+ 1131  cd src/Modules/LineFollowPy/
+ 1132  ls
+ 1133  which python3.5
+ 1134  head StaticTest.py 
+ 1135  chmod u+x StaticTest.py 
+ 1136  ls
+ 1137  ./StaticTest.py 
+ 1138  git add *
+ 1139  git commit --message "start finding contour closest to bottom"
+ 1140  git push
+ 1141  cd Documents/jevois/jevoislinefollow/
+ 1142  ls
+ 1143  cd linefollowpy/
+ 1144  ls
+ 1145  cd src/
+ 1146  ls
+ 1147  cd Modules/
+ 1148  ls
+ 1149  cd LineFollowPy/
+ 1150  ls
+ 1151  ./StaticTest.py 
+ 1152  history
+
+# another reminder - select one of the OpenCV graphical windows and then hit 'q' to quit
 
 
 
